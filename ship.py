@@ -12,7 +12,24 @@ class Ship:
         self.rect = self.image.get_rect()
         ## start each new ship at the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
+        #mmovement flag
+        self.moving_right = False
+        self.moving_left = False
+        self.setting = ai_game.game_settings
+        # store decimal value fo ships horizontal position
+        self.x = float(self.rect.x)
+
+
 
     def blitme(self):
         ##draw ship at current loation
         self.screen.blit(self.image, self.rect)
+
+    def update(self):
+        if self.moving_right:
+            self.x += self.setting.ship_speed
+        elif self.moving_left:
+            self.x -= self.setting.ship_speed
+
+        # update rect object from self x
+        self.rect.x = self.x
